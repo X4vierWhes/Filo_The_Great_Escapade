@@ -1,6 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwkiyfr51gug5"]
+[gd_scene load_steps=17 format=3 uid="uid://bwkiyfr51gug5"]
 
+[ext_resource type="Script" uid="uid://yx7580aq2bxa" path="res://scripts/characters/obj_player.gd" id="1_al7wv"]
 [ext_resource type="Texture2D" uid="uid://cfoubkbu2nhnw" path="res://resources/capybara/Player.png" id="1_lkki5"]
+[ext_resource type="PackedScene" uid="uid://d2fk6qnh7cs2u" path="res://scenes/components/input_component.tscn" id="3_4ug2v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_al7wv"]
 atlas = ExtResource("1_lkki5")
@@ -97,11 +99,25 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_al7wv"]
+size = Vector2(18, 17.3333)
+
 [node name="objPlayer" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_al7wv")
+speed = 200.0
 
 [node name="animPlayer" type="AnimatedSprite2D" parent="."]
 texture_filter = 3
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_1dhwp")
 animation = &"run"
 frame_progress = 0.900595
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.66667, 6)
+shape = SubResource("RectangleShape2D_al7wv")
+
+[node name="InputComponent" parent="." instance=ExtResource("3_4ug2v")]
+
+[connection signal="input_detected" from="InputComponent" to="." method="_on_input_component_input_detected"]

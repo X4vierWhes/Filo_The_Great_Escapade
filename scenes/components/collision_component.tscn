@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://c4hery1n7xnwu"]
+[gd_scene load_steps=2 format=3 uid="uid://c4hery1n7xnwu"]
+
+[ext_resource type="Script" uid="uid://cdmkh8ypf5fn7" path="res://scripts/components/collision_component.gd" id="1_lqnj3"]
 
 [node name="CollisionComponent" type="Area2D"]
+script = ExtResource("1_lqnj3")

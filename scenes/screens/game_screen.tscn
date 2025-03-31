@@ -27,22 +27,15 @@ texture_filter = 3
 
 [node name="sky" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/background"]
 texture_filter = 3
-position = Vector2(2, 0)
-scale = Vector2(1.79688, 1.54048)
+position = Vector2(0, -2.38419e-07)
+scale = Vector2(1.8, 1.53334)
 texture = ExtResource("2_5wjna")
 centered = false
 
 [node name="sky2" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/background"]
 texture_filter = 3
-position = Vector2(1147, -1.19209e-07)
-scale = Vector2(1.79688, 1.54048)
-texture = ExtResource("2_5wjna")
-centered = false
-
-[node name="sky3" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/background"]
-texture_filter = 3
-position = Vector2(-1147, -7.10543e-15)
-scale = Vector2(1.79688, 1.54048)
+position = Vector2(1152, 0)
+scale = Vector2(1.8, 1.53334)
 texture = ExtResource("2_5wjna")
 centered = false
 
@@ -51,21 +44,27 @@ texture_filter = 3
 
 [node name="foreground" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/road"]
 texture_filter = 3
-position = Vector2(4, 237)
-scale = Vector2(1.79688, 1.54048)
+position = Vector2(0, 235)
+scale = Vector2(1.8, 1.54074)
 texture = ExtResource("3_atdcb")
 centered = false
 
 [node name="foreground2" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/road"]
 texture_filter = 3
-position = Vector2(1149, 237)
-scale = Vector2(1.79688, 1.54048)
+position = Vector2(1152, 235)
+scale = Vector2(1.8, 1.54074)
 texture = ExtResource("3_atdcb")
 centered = false
 
-[node name="foreground3" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/road"]
-texture_filter = 3
-position = Vector2(-1145, 237)
-scale = Vector2(1.79688, 1.54048)
-texture = ExtResource("3_atdcb")
-centered = false
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control"]
+position = Vector2(52, 543)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+text = "0"

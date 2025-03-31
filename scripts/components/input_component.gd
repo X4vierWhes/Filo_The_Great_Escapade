@@ -6,8 +6,7 @@ signal action_detected(action: String)
 func _process(delta: float) -> void:
 	var input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	if input != Vector2.ZERO:
-		emit_signal("input_detected", input)
+	emit_signal("input_detected", input)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):

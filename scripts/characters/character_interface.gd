@@ -12,3 +12,7 @@ signal death
 #Verificações padrões para os personagens
 var OnGround: bool = false
 var isAttacking: bool = false
+
+
+func jump() -> void:
+	pass
