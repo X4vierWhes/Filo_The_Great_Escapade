@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpanby58fjtpi"]
+
+[ext_resource type="Script" uid="uid://coj1jnkvpkg0o" path="res://scripts/game.gd" id="1_yqjtg"]
+
+[node name="game" type="Node2D" node_paths=PackedStringArray("playlist")]
+script = ExtResource("1_yqjtg")
+playlist = NodePath("playlist")
+
+[node name="playlist" type="AudioStreamPlayer" parent="."]
+
+[connection signal="finished" from="playlist" to="." method="_on_playlist_finished"]

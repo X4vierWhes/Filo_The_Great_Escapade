@@ -1,0 +1,2 @@
+extends ScreenInterface
+class_name GameScreen

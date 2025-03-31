@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://duiuvo4nxt7a"]
+
+[ext_resource type="Script" uid="uid://d1q2imntgslsw" path="res://scripts/screens/screen_interface.gd" id="1_4tjdx"]
+
+[node name="screen_interface" type="Node2D"]
+script = ExtResource("1_4tjdx")

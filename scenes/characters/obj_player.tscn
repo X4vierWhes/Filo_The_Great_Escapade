@@ -1,0 +1,107 @@
+[gd_scene load_steps=14 format=3 uid="uid://bwkiyfr51gug5"]
+
+[ext_resource type="Texture2D" uid="uid://cfoubkbu2nhnw" path="res://resources/capybara/Player.png" id="1_lkki5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_al7wv"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(0, 32, 34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ug2v"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(34, 32, 34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k76db"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(68, 32, 34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjvmg"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(102, 32, 34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_222kf"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(136, 32, 34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykh6h"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(0, 96, 34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip0ak"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(0, 0, 34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_711tn"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(34, 0, 34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q5do"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(68, 0, 34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5orif"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(102, 0, 34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mi5l"]
+atlas = ExtResource("1_lkki5")
+region = Rect2(136, 0, 34, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1dhwp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_al7wv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ug2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k76db")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjvmg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_222kf")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykh6h")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip0ak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_711tn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3q5do")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5orif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mi5l")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="objPlayer" type="CharacterBody2D"]
+
+[node name="animPlayer" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_1dhwp")
+animation = &"run"
+frame_progress = 0.900595

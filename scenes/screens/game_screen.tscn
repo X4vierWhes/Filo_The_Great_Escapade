@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://5pnuxf4aswaq"]
+
+[ext_resource type="Script" uid="uid://b3hxg4um1pl14" path="res://scripts/screens/game_screen.gd" id="1_5wjna"]
+[ext_resource type="Script" uid="uid://5itrleogvfsw" path="res://scripts/screens/parallax_background.gd" id="1_dtf0s"]
+[ext_resource type="Texture2D" uid="uid://cy6osj57qdeop" path="res://resources/screens/Background.png" id="2_5wjna"]
+[ext_resource type="Texture2D" uid="uid://bsjqnnfk4i28d" path="res://resources/screens/Foreground.png" id="3_atdcb"]
+
+[node name="game_screen" type="Node2D"]
+script = ExtResource("1_5wjna")
+screen_audio = "Level_Music"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer/Control"]
+script = ExtResource("1_dtf0s")
+
+[node name="background" type="ParallaxLayer" parent="CanvasLayer/Control/ParallaxBackground"]
+texture_filter = 3
+
+[node name="sky" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/background"]
+texture_filter = 3
+position = Vector2(2, 0)
+scale = Vector2(1.79688, 1.54048)
+texture = ExtResource("2_5wjna")
+centered = false
+
+[node name="sky2" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/background"]
+texture_filter = 3
+position = Vector2(1147, -1.19209e-07)
+scale = Vector2(1.79688, 1.54048)
+texture = ExtResource("2_5wjna")
+centered = false
+
+[node name="sky3" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/background"]
+texture_filter = 3
+position = Vector2(-1147, -7.10543e-15)
+scale = Vector2(1.79688, 1.54048)
+texture = ExtResource("2_5wjna")
+centered = false
+
+[node name="road" type="ParallaxLayer" parent="CanvasLayer/Control/ParallaxBackground"]
+texture_filter = 3
+
+[node name="foreground" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/road"]
+texture_filter = 3
+position = Vector2(4, 237)
+scale = Vector2(1.79688, 1.54048)
+texture = ExtResource("3_atdcb")
+centered = false
+
+[node name="foreground2" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/road"]
+texture_filter = 3
+position = Vector2(1149, 237)
+scale = Vector2(1.79688, 1.54048)
+texture = ExtResource("3_atdcb")
+centered = false
+
+[node name="foreground3" type="Sprite2D" parent="CanvasLayer/Control/ParallaxBackground/road"]
+texture_filter = 3
+position = Vector2(-1145, 237)
+scale = Vector2(1.79688, 1.54048)
+texture = ExtResource("3_atdcb")
+centered = false
