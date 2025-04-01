@@ -21,9 +21,9 @@ sources/1 = SubResource("TileSetAtlasSource_wvjml")
 
 [node name="game_screen" type="Node2D" node_paths=PackedStringArray("marker_2d", "label")]
 script = ExtResource("1_5wjna")
-screen_audio = "Level_Music"
 marker_2d = NodePath("CanvasLayer/Control/Marker2D")
 label = NodePath("CanvasLayer/Control/RichTextLabel")
+screen_audio = "Level_Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
