@@ -106,7 +106,7 @@ size = Vector2(20, 21.3333)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_al7wv")
 speed = 200.0
-vSpd = 150.0
+vSpd = 300.0
 gravity = 20.0
 
 [node name="animPlayer" type="AnimatedSprite2D" parent="."]
@@ -117,10 +117,15 @@ animation = &"run"
 frame_progress = 0.900595
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4.66667, 8.00001)
+light_mask = 2
+position = Vector2(-4.66667, 8)
 shape = SubResource("RectangleShape2D_al7wv")
 
 [node name="InputComponent" parent="." instance=ExtResource("3_4ug2v")]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-4.66667, 16.6667)
+target_position = Vector2(0, 30)
 
 [connection signal="action_detected" from="InputComponent" to="." method="_on_input_component_action_detected"]
 [connection signal="input_detected" from="InputComponent" to="." method="_on_input_component_input_detected"]
