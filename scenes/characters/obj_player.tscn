@@ -106,8 +106,8 @@ size = Vector2(20, 21.3333)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_al7wv")
 speed = 200.0
-vSpd = 300.0
-gravity = 20.0
+vSpd = 700.0
+gravity = 250.0
 
 [node name="animPlayer" type="AnimatedSprite2D" parent="."]
 texture_filter = 3
