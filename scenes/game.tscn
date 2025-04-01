@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpanby58fjtpi"]
+[gd_scene load_steps=3 format=3 uid="uid://dpanby58fjtpi"]
 
 [ext_resource type="Script" uid="uid://coj1jnkvpkg0o" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bo102ryaoplnv" path="res://scenes/components/transition_component.tscn" id="2_yqjtg"]
 
-[node name="game" type="Node2D" node_paths=PackedStringArray("playlist")]
+[node name="game" type="Node2D" node_paths=PackedStringArray("playlist", "transition_screen")]
 script = ExtResource("1_yqjtg")
 playlist = NodePath("playlist")
+transition_screen = NodePath("TransitionComponent")
 
 [node name="playlist" type="AudioStreamPlayer" parent="."]
+
+[node name="TransitionComponent" parent="." instance=ExtResource("2_yqjtg")]
 
 [connection signal="finished" from="playlist" to="." method="_on_playlist_finished"]

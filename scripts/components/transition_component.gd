@@ -4,19 +4,11 @@ class_name TransitionComponent
 @onready var color = $Control/ColorRect
 @onready var animation = $AnimationPlayer
 
-signal transition_finished
+signal animation_end
 
-func _ready() -> void:
-	color.visible = false
-	animation.animation_finished.connect(transition_anim)
+func play_anim(anim_name: String) -> void:
+	animation.play(anim_name)
 
-func transition_anim(anim_name: String) -> void:
-	if anim_name == "fade_out":
-		transition_finished.emit()
-		animation.play("fade_in")
-	elif anim_name == "fade_in":
-		color.visible = false
-
-func transition() -> void:
-	color.visible = true
-	animation.play("fade_out")
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	print("fim")
+	emit_signal("animation_end")

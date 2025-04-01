@@ -3,6 +3,7 @@ class_name Game
 #Essa classe serve como o node principal do jogo
 
 @export var playlist: AudioStreamPlayer 
+@export var transition_screen: TransitionComponent
 
 const INIT_MENU = preload("res://scenes/screens/init_menu.tscn") 
 var current_audio: String = "null"
@@ -13,12 +14,12 @@ func _ready() -> void:
 	load_screen(current_screen)
 
 func load_screen(current_screen: ScreenInterface) -> void:
-	TransitionScreen.transition()
+	
 	if current_screen is ScreenInterface:
-		await TransitionScreen.transition_finished
 		add_child(current_screen)
 		play_track(current_screen)
 		current_screen.close_screen.connect(change_screen)
+	
 
 func play_track(current_screen: ScreenInterface) -> void:
 	if current_screen:
@@ -33,10 +34,15 @@ func change_screen() -> void:
 	print("clicado")
 	var nextScreen: String = current_screen.get_NextScreen()
 	if nextScreen != "null":
+		transition_screen.play_anim("fade_in")
+		await transition_screen.animation_end
+		
 		remove_child(current_screen)
 		current_screen.queue_free()
 		current_screen = load(nextScreen).instantiate()
 		load_screen(current_screen)
+		
+		transition_screen.play_anim("fade_out")
 
 
 func _on_playlist_finished() -> void:
