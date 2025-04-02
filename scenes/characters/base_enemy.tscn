@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu8uf7xr05y4j"]
+
+[ext_resource type="Script" uid="uid://b3ytbo8xw42wq" path="res://scripts/characters/obj_enemy.gd" id="1_dbqx0"]
+
+[node name="baseEnemy" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_dbqx0")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+
+[node name="collision" type="CollisionPolygon2D" parent="."]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
