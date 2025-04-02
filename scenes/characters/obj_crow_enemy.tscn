@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwf1t27irqgvj"]
+
+[ext_resource type="PackedScene" uid="uid://bu8uf7xr05y4j" path="res://scenes/characters/base_enemy.tscn" id="1_okse4"]
+[ext_resource type="Texture2D" uid="uid://cgivcl1ni8dhq" path="res://resources/enemys/Crow_Enemy.png" id="2_sdlos"]
+[ext_resource type="Script" uid="uid://bdhrwdcbqshfn" path="res://scenes/characters/obj_crow_enemy.gd" id="2_ts3rr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts3rr"]
+atlas = ExtResource("2_sdlos")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdk16"]
+atlas = ExtResource("2_sdlos")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pofnu"]
+atlas = ExtResource("2_sdlos")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1ufe"]
+atlas = ExtResource("2_sdlos")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1qobg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ts3rr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdk16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pofnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1ufe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="objCrowEnemy" instance=ExtResource("1_okse4")]
+script = ExtResource("2_ts3rr")
+
+[node name="anim" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_1qobg")
+autoplay = "default"
+
+[node name="collision" parent="." index="1"]
+polygon = PackedVector2Array(-6, 10, -17, -4, -12, -8, -9, -8, -2, -5, 13, 5, 5, 10)
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+position = Vector2(0, -0.499999)
+scale = Vector2(1.8, 1.15)
