@@ -1,8 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://bwkiyfr51gug5"]
+[gd_scene load_steps=21 format=3 uid="uid://bwkiyfr51gug5"]
 
 [ext_resource type="Script" uid="uid://yx7580aq2bxa" path="res://scripts/characters/obj_player.gd" id="1_al7wv"]
 [ext_resource type="Texture2D" uid="uid://cfoubkbu2nhnw" path="res://resources/capybara/Player.png" id="1_lkki5"]
-[ext_resource type="PackedScene" uid="uid://d2fk6qnh7cs2u" path="res://scenes/components/input_component.tscn" id="3_4ug2v"]
+[ext_resource type="Script" uid="uid://b0585csxi15tx" path="res://scripts/components/move_component.gd" id="3_4ug2v"]
+[ext_resource type="Script" uid="uid://cr6afbw1gm67n" path="res://scripts/components/jump_component.gd" id="4_k76db"]
+[ext_resource type="Script" uid="uid://cxiw4do2kd6dn" path="res://scenes/characters/attack_component.gd" id="5_jjvmg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_al7wv"]
 atlas = ExtResource("1_lkki5")
@@ -125,20 +127,19 @@ light_mask = 2
 position = Vector2(-4.66667, 8)
 shape = SubResource("RectangleShape2D_al7wv")
 
-[node name="InputComponent" parent="." instance=ExtResource("3_4ug2v")]
-
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-4.66667, 16.6667)
 target_position = Vector2(0, 30)
 
 [node name="attackArea" type="Area2D" parent="."]
+scale = Vector2(1.5, 1.5)
 collision_layer = 2
 collision_mask = 4
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]
 position = Vector2(31.3333, 7.33333)
 shape = SubResource("RectangleShape2D_4ug2v")
-disabled = true
 debug_color = Color(0.983579, 0, 0.351716, 0.42)
 
 [node name="collisionArea" type="Area2D" parent="."]
@@ -149,8 +150,17 @@ position = Vector2(-0.666666, 8.33333)
 shape = SubResource("RectangleShape2D_k76db")
 debug_color = Color(0.621578, 0.533752, 0, 0.42)
 
+[node name="moveComponent" type="Node" parent="."]
+script = ExtResource("3_4ug2v")
+
+[node name="jumpComponent" type="Node" parent="."]
+script = ExtResource("4_k76db")
+
+[node name="attackComponent" type="Node2D" parent="." node_paths=PackedStringArray("attack_area")]
+script = ExtResource("5_jjvmg")
+attack_area = NodePath("../attackArea")
+
 [connection signal="animation_finished" from="animPlayer" to="." method="_on_anim_player_animation_finished"]
-[connection signal="action_detected" from="InputComponent" to="." method="_on_input_component_action_detected"]
-[connection signal="input_detected" from="InputComponent" to="." method="_on_input_component_input_detected"]
+[connection signal="animation_finished" from="animPlayer" to="attackComponent" method="_on_anim_player_animation_finished"]
 [connection signal="body_entered" from="attackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_entered" from="collisionArea" to="." method="_on_collision_area_body_entered"]
