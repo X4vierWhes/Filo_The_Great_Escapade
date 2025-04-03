@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgaa7c48yaii3"]
+
+[ext_resource type="Script" uid="uid://cgdsgsldhairo" path="res://scripts/characters/obj_wolf_attack.gd" id="1_5rxkl"]
+[ext_resource type="Texture2D" uid="uid://c46yaeb4d6v4o" path="res://resources/wolf/Wolf_Attack.png" id="2_cs65d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c40k"]
+atlas = ExtResource("2_cs65d")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evuix"]
+atlas = ExtResource("2_cs65d")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_us6lt"]
+atlas = ExtResource("2_cs65d")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n4guc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1c40k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evuix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_us6lt")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbghr"]
+size = Vector2(20, 35)
+
+[node name="obj_wolf_attack" type="CharacterBody2D"]
+script = ExtResource("1_5rxkl")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n4guc")
+animation = &"run"
+frame_progress = 0.54838
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9, 2.5)
+shape = SubResource("RectangleShape2D_fbghr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(9, 1)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

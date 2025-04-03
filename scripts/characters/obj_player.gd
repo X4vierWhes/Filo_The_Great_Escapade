@@ -4,6 +4,7 @@ class_name Player
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var anim_player: AnimatedSprite2D = $animPlayer
 @onready var attack_area: Area2D = $attackArea
+@onready var player_damage: float = 150.0
 
 func _ready() -> void:
 	state = "run"
@@ -45,7 +46,6 @@ func jump() -> void:
 
 func attack() -> void:
 	if is_on_ground() and !isAttacking:
-		#print("atacou")
 		state = "attacking"
 		isAttacking = !isAttacking
 		attack_area.get_child(0).disabled = false
@@ -62,12 +62,13 @@ func _on_anim_player_animation_finished() -> void:
 		isAttacking = !isAttacking
 		state = "run"
 
-
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.death()
-
+	elif body is Wolf:
+		print("corpo é lobo")
+		body.get_Damage(player_damage)
 
 func _on_collision_area_body_entered(body: Node2D) -> void:
-	if body is Enemy:
+	if body is Enemy or body is WolfAttack:
 		emit_signal("death")

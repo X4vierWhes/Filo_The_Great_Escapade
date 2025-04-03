@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://5pnuxf4aswaq"]
+[gd_scene load_steps=14 format=4 uid="uid://5pnuxf4aswaq"]
 
 [ext_resource type="Script" uid="uid://b3hxg4um1pl14" path="res://scripts/screens/game_screen.gd" id="1_5wjna"]
 [ext_resource type="Texture2D" uid="uid://cy6osj57qdeop" path="res://resources/screens/Background.png" id="2_5wjna"]
+[ext_resource type="PackedScene" uid="uid://bkhgitperhdsu" path="res://scenes/characters/obj_wolf.tscn" id="2_wvjml"]
 [ext_resource type="Texture2D" uid="uid://bsjqnnfk4i28d" path="res://resources/screens/Foreground.png" id="3_atdcb"]
+[ext_resource type="Script" uid="uid://k88ca3lccx67" path="res://scripts/screens/parallax_background.gd" id="4_xi1he"]
 [ext_resource type="FontFile" uid="uid://be7xknjupmbh4" path="res://resources/font/Minecraft.ttf" id="5_atdcb"]
 [ext_resource type="Texture2D" uid="uid://dqb2a71cpyxyx" path="res://resources/Wall.png" id="5_riit4"]
 [ext_resource type="Script" uid="uid://wmbpd8rlqofq" path="res://scripts/components/spawner_component.gd" id="6_riit4"]
@@ -20,11 +22,70 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 2
 sources/1 = SubResource("TileSetAtlasSource_wvjml")
 
-[node name="game_screen" type="Node2D" node_paths=PackedStringArray("marker_2d", "label", "spawner")]
+[sub_resource type="Animation" id="Animation_wvjml"]
+resource_name = "wolf_entered"
+length = 5.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/obj_Wolf")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"play_anim_walk"
+}, {
+"args": [],
+"method": &"play_anim_howl"
+}, {
+"args": [],
+"method": &"init_wolf"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Control/obj_Wolf:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1546, 475), Vector2(1031, 478)]
+}
+
+[sub_resource type="Animation" id="Animation_xi1he"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/obj_Wolf:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1413, 462), Vector2(1379, 468)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xi1he"]
+_data = {
+&"RESET": SubResource("Animation_xi1he"),
+&"wolf_entered": SubResource("Animation_wvjml")
+}
+
+[node name="game_screen" type="Node2D" node_paths=PackedStringArray("player_spawn", "label", "spawner", "anim_player")]
 script = ExtResource("1_5wjna")
-marker_2d = NodePath("CanvasLayer/Control/Marker2D")
+player_spawn = NodePath("CanvasLayer/Control/playerSpawn")
 label = NodePath("CanvasLayer/Control/RichTextLabel")
 spawner = NodePath("SpawnerComponent")
+dist = 280
+anim_player = NodePath("AnimationPlayer")
 screen_audio = "Level_Music"
 
 [node name="DistTimer" type="Timer" parent="."]
@@ -43,8 +104,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control"]
+[node name="playerSpawn" type="Marker2D" parent="CanvasLayer/Control"]
 position = Vector2(58, 517)
+
+[node name="obj_Wolf" parent="CanvasLayer/Control" instance=ExtResource("2_wvjml")]
+texture_filter = 3
+position = Vector2(1413, 462)
+scale = Vector2(2, 2)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -63,6 +129,7 @@ vertical_alignment = 1
 justification_flags = 161
 
 [node name="ParallaxBackground" type="Node2D" parent="."]
+script = ExtResource("4_xi1he")
 
 [node name="background" type="Parallax2D" parent="ParallaxBackground"]
 texture_filter = 3
@@ -105,6 +172,14 @@ position = Vector2(1240, 345)
 
 [node name="floor_spawner" type="Marker2D" parent="SpawnerComponent"]
 position = Vector2(1240, 517)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xi1he")
+}
 
 [connection signal="timeout" from="DistTimer" to="." method="_on_dist_timer_timeout"]
 [connection signal="timeout" from="spawnerTimer" to="." method="_on_spawner_timer_timeout"]

@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=3 uid="uid://dj6rdrs8y6vj7"]
+
+[ext_resource type="Script" uid="uid://cmhat4vsms5g" path="res://scripts/screens/win_screen.gd" id="1_xjpxm"]
+[ext_resource type="Texture2D" uid="uid://dt8n1o8a2fymb" path="res://resources/screens/Win_Screen.png" id="2_ctclw"]
+[ext_resource type="Texture2D" uid="uid://cwd5jhi7ngywv" path="res://resources/screens/Capybara_Crown.png" id="3_cmosp"]
+[ext_resource type="FontFile" uid="uid://be7xknjupmbh4" path="res://resources/font/Minecraft.ttf" id="3_mcovk"]
+[ext_resource type="PackedScene" uid="uid://d2fk6qnh7cs2u" path="res://scenes/components/input_component.tscn" id="4_mcovk"]
+
+[sub_resource type="Animation" id="Animation_ey0qu"]
+resource_name = "crown"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/CapybaraCrown:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(588, 36), Vector2(587, 164), Vector2(588, 36)]
+}
+
+[sub_resource type="Animation" id="Animation_l5ckm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/CapybaraCrown:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(588, 36)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5w3vv"]
+_data = {
+&"RESET": SubResource("Animation_l5ckm"),
+&"crown": SubResource("Animation_ey0qu")
+}
+
+[node name="win_screen" type="Node2D"]
+script = ExtResource("1_xjpxm")
+screen_audio = "Win_Music"
+next_screen = "init_menu"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ctclw")
+
+[node name="CapybaraCrown" type="Sprite2D" parent="CanvasLayer/Control"]
+texture_filter = 3
+position = Vector2(588, 36)
+scale = Vector2(2, 2)
+texture = ExtResource("3_cmosp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -351.0
+offset_top = 112.0
+offset_right = 10.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme_override_fonts/normal_font = ExtResource("3_mcovk")
+bbcode_enabled = true
+text = "[color= black][pulse freq=2.0 color=#ffffff40 ease=-2.0]>Presione [ENTER] para voltar ao menu principal< [/pulse][/color]
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputComponent" parent="." instance=ExtResource("4_mcovk")]
+
+[node name="flipTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5w3vv")
+}
+
+[connection signal="action_detected" from="InputComponent" to="." method="_on_input_component_action_detected"]
+[connection signal="timeout" from="flipTimer" to="." method="_on_flip_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

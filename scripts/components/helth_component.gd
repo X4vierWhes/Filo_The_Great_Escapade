@@ -10,6 +10,9 @@ signal death
 func _ready() -> void:
 	health = max_health_value
 
+func get_Health() -> float:
+	return health
+
 func decrease_health(amount: float) -> void:
 	health -= amount
 	if health_bar:

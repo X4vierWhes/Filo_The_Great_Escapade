@@ -3,18 +3,24 @@ class_name GameScreen
 
 const OBJ_PLAYER = preload("res://scenes/characters/obj_player.tscn")
 
-@export var marker_2d: Marker2D
+@export var player_spawn: Marker2D
 @export var label: RichTextLabel
 @export var spawner: SpawnerComponent
 @export var dist: int = 0
+@export var anim_player: AnimationPlayer
+
 @onready var dist_timer: Timer = $DistTimer
 @onready var spawner_timer: Timer = $spawnerTimer
 @onready var enemy_names: Array[String]
+@onready var obj_wolf: Wolf = $CanvasLayer/Control/obj_Wolf
+@onready var parallax_background: Parallax = $ParallaxBackground
 
+var wolf_spawned: bool = false
 func _ready() -> void:
+	obj_wolf.death.connect(_on_wolf_death)
 	var player: Player = OBJ_PLAYER.instantiate()
-	player.position.x = marker_2d.position.x
-	player.position.y = marker_2d.position.y
+	player.position.x = player_spawn.position.x
+	player.position.y = player_spawn.position.y
 	player.death.connect(_on_player_death)
 	add_child(player)
 	enemy_names = spawner.get_Enemy_Names()
@@ -22,9 +28,15 @@ func _ready() -> void:
 	_spawn_enemy_with_random_delay()
 
 func _process(delta: float) -> void:
-	if dist == 300:
+	if dist == 300 and not wolf_spawned:
 		spawner_timer.stop()
 		dist_timer.stop()
+		parallax_background.stop()
+		anim_player.play("wolf_entered")
+		await anim_player.animation_finished
+		anim_player.queue_free()
+		obj_wolf.position.x = 1031.0
+		wolf_spawned = true
 
 func attDist() -> void:
 	dist+=1
@@ -52,5 +64,8 @@ func _spawn_enemy_with_random_delay() -> void:
 
 func _on_player_death() -> void:
 	set_NextScreen("game_over_screen")
-	print(next_screen)
+	emit_signal("close_screen")
+
+func _on_wolf_death() -> void:
+	set_NextScreen("win_screen")
 	emit_signal("close_screen")
