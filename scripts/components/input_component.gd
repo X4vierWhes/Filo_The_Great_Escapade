@@ -3,7 +3,7 @@ class_name InputComponent extends Node2D
 signal input_detected(input_vector: Vector2)
 signal action_detected(action: String)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	emit_signal("input_detected", input)

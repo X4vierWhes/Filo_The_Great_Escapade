@@ -16,4 +16,4 @@ func get_NextScreen() -> String:
 	return next_screen
 
 func set_NextScreen(next: String) -> void:
-	next_screen = "res://scenes/screens/" + next + ".tscn"
+	next_screen = next

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bwkiyfr51gug5"]
+[gd_scene load_steps=19 format=3 uid="uid://bwkiyfr51gug5"]
 
 [ext_resource type="Script" uid="uid://yx7580aq2bxa" path="res://scripts/characters/obj_player.gd" id="1_al7wv"]
 [ext_resource type="Texture2D" uid="uid://cfoubkbu2nhnw" path="res://resources/capybara/Player.png" id="1_lkki5"]
@@ -66,15 +66,15 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_222kf")
 }],
-"loop": true,
+"loop": false,
 "name": &"attacking",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ykh6h")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -94,27 +94,31 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2mi5l")
 }],
-"loop": true,
+"loop": false,
 "name": &"run",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_al7wv"]
 size = Vector2(20, 21.3333)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ug2v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k76db"]
+size = Vector2(30.6667, 19.3333)
+
 [node name="objPlayer" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_al7wv")
 speed = 200.0
-vSpd = 700.0
-gravity = 250.0
+vSpd = 350.0
+gravity = 400.0
 
 [node name="animPlayer" type="AnimatedSprite2D" parent="."]
 texture_filter = 3
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_1dhwp")
 animation = &"run"
-frame_progress = 0.900595
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 2
@@ -127,5 +131,26 @@ shape = SubResource("RectangleShape2D_al7wv")
 position = Vector2(-4.66667, 16.6667)
 target_position = Vector2(0, 30)
 
+[node name="attackArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]
+position = Vector2(31.3333, 7.33333)
+shape = SubResource("RectangleShape2D_4ug2v")
+disabled = true
+debug_color = Color(0.983579, 0, 0.351716, 0.42)
+
+[node name="collisionArea" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisionArea"]
+position = Vector2(-0.666666, 8.33333)
+shape = SubResource("RectangleShape2D_k76db")
+debug_color = Color(0.621578, 0.533752, 0, 0.42)
+
+[connection signal="animation_finished" from="animPlayer" to="." method="_on_anim_player_animation_finished"]
 [connection signal="action_detected" from="InputComponent" to="." method="_on_input_component_action_detected"]
 [connection signal="input_detected" from="InputComponent" to="." method="_on_input_component_input_detected"]
+[connection signal="body_entered" from="attackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="collisionArea" to="." method="_on_collision_area_body_entered"]

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name CharacterInterface
+
 #Sinal de morte do personagem
 signal death
 
@@ -8,9 +9,9 @@ signal death
 @export var hSpd: float = 0.0
 @export var vSpd: float = 0.0
 @export var gravity: float = 0.0
-var state: String = "idle"
+var state: String = ""
 
 #Verificações padrões para os personagens
-var OnGround: bool = true
 var isAttacking: bool = false
 var isDeath: bool = false
+var doubleJump: bool = false

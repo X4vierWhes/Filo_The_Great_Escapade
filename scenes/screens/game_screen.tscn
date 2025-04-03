@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://5pnuxf4aswaq"]
+[gd_scene load_steps=9 format=4 uid="uid://5pnuxf4aswaq"]
 
 [ext_resource type="Script" uid="uid://b3hxg4um1pl14" path="res://scripts/screens/game_screen.gd" id="1_5wjna"]
 [ext_resource type="Texture2D" uid="uid://cy6osj57qdeop" path="res://resources/screens/Background.png" id="2_5wjna"]
 [ext_resource type="Texture2D" uid="uid://bsjqnnfk4i28d" path="res://resources/screens/Foreground.png" id="3_atdcb"]
 [ext_resource type="FontFile" uid="uid://be7xknjupmbh4" path="res://resources/font/Minecraft.ttf" id="5_atdcb"]
 [ext_resource type="Texture2D" uid="uid://dqb2a71cpyxyx" path="res://resources/Wall.png" id="5_riit4"]
+[ext_resource type="Script" uid="uid://wmbpd8rlqofq" path="res://scripts/components/spawner_component.gd" id="6_riit4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wvjml"]
 resource_name = "wall"
@@ -19,11 +20,18 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 2
 sources/1 = SubResource("TileSetAtlasSource_wvjml")
 
-[node name="game_screen" type="Node2D" node_paths=PackedStringArray("marker_2d", "label")]
+[node name="game_screen" type="Node2D" node_paths=PackedStringArray("marker_2d", "label", "spawner")]
 script = ExtResource("1_5wjna")
 marker_2d = NodePath("CanvasLayer/Control/Marker2D")
 label = NodePath("CanvasLayer/Control/RichTextLabel")
+spawner = NodePath("SpawnerComponent")
 screen_audio = "Level_Music"
+
+[node name="DistTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="spawnerTimer" type="Timer" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -36,23 +44,23 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control"]
-position = Vector2(82, 366)
+position = Vector2(58, 517)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -35.0
+offset_left = -48.0
 offset_bottom = 15.0
 grow_horizontal = 0
 theme_override_fonts/normal_font = ExtResource("5_atdcb")
 bbcode_enabled = true
 text = "0"
-
-[node name="DistTimer" type="Timer" parent="."]
-wait_time = 0.3
-autostart = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 161
 
 [node name="ParallaxBackground" type="Node2D" parent="."]
 
@@ -83,10 +91,20 @@ texture = ExtResource("3_atdcb")
 centered = false
 
 [node name="wall" type="Node2D" parent="."]
-visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="wall"]
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAAD//wEAAQAAAAAAAAD//wIAAQAAAAAAAAD//wMAAQAAAAAAAAD//wQAAQAAAAAAAAD//wUAAQAAAAAAAAD//wYAAQAAAAAAAAD//wcAAQAAAAAAAAD//wgAAQAAAAAAAAD//wkAAQAAAAAAAAD//woAAQAAAAAAAAD//wsAAQAAAAAAAAD//wwAAQAAAAAAAAD//w0AAQAAAAAAAAD//w4AAQAAAAAAAAD//w8AAQAAAAAAAAD//xAAAQAAAAAAAAD//xEAAQAAAAAAAAD//xIAAQAAAAAAAAAkABIAAQAAAAAAAAAkABEAAQAAAAAAAAAkABAAAQAAAAAAAAAkAA8AAQAAAAAAAAAkAA4AAQAAAAAAAAAkAA0AAQAAAAAAAAAkAAwAAQAAAAAAAAAkAAsAAQAAAAAAAAAkAAoAAQAAAAAAAAAkAAkAAQAAAAAAAAAkAAgAAQAAAAAAAAAkAAcAAQAAAAAAAAAkAAYAAQAAAAAAAAAkAAUAAQAAAAAAAAAkAAQAAQAAAAAAAAAkAAMAAQAAAAAAAAAkAAIAAQAAAAAAAAAkAAEAAQAAAAAAAAAkAAAAAQAAAAAAAAADABIAAQAAAAAAAAAAABIAAQAAAAAAAAABABIAAQAAAAAAAAACABIAAQAAAAAAAAAWABIAAQAAAAAAAAAXABIAAQAAAAAAAAAYABIAAQAAAAAAAAAZABIAAQAAAAAAAAAaABIAAQAAAAAAAAAbABIAAQAAAAAAAAAcABIAAQAAAAAAAAAdABIAAQAAAAAAAAAeABIAAQAAAAAAAAAfABIAAQAAAAAAAAAhABIAAQAAAAAAAAAiABIAAQAAAAAAAAAgABIAAQAAAAAAAAAVABIAAQAAAAAAAAAUABIAAQAAAAAAAAATABIAAQAAAAAAAAASABIAAQAAAAAAAAARABIAAQAAAAAAAAAQABIAAQAAAAAAAAAPABIAAQAAAAAAAAAOABIAAQAAAAAAAAANABIAAQAAAAAAAAAMABIAAQAAAAAAAAALABIAAQAAAAAAAAAKABIAAQAAAAAAAAAJABIAAQAAAAAAAAAIABIAAQAAAAAAAAAHABIAAQAAAAAAAAAGABIAAQAAAAAAAAAFABIAAQAAAAAAAAAEABIAAQAAAAAAAAAjABIAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_xi1he")
 
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("6_riit4")
+enemy_names = Array[String](["box", "crow", "frog"])
+
+[node name="air_spawner" type="Marker2D" parent="SpawnerComponent"]
+position = Vector2(1240, 345)
+
+[node name="floor_spawner" type="Marker2D" parent="SpawnerComponent"]
+position = Vector2(1240, 517)
+
 [connection signal="timeout" from="DistTimer" to="." method="_on_dist_timer_timeout"]
+[connection signal="timeout" from="spawnerTimer" to="." method="_on_spawner_timer_timeout"]

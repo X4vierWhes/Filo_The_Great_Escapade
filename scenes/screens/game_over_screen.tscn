@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmvheprtr4lwl"]
+
+[ext_resource type="Script" uid="uid://evx3idd3v1ue" path="res://scripts/screens/game_over_screen.gd" id="1_qbcbk"]
+[ext_resource type="Texture2D" uid="uid://dhodxtudusmq2" path="res://resources/screens/Game_Over.png" id="2_alvey"]
+[ext_resource type="FontFile" uid="uid://be7xknjupmbh4" path="res://resources/font/Minecraft.ttf" id="3_s2tsk"]
+[ext_resource type="PackedScene" uid="uid://d2fk6qnh7cs2u" path="res://scenes/components/input_component.tscn" id="4_s2tsk"]
+
+[node name="game_over_screen" type="Node2D"]
+script = ExtResource("1_qbcbk")
+screen_audio = "Game_Over_Music"
+next_screen = "init_menu"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_alvey")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -365.0
+offset_top = -20.0
+offset_right = -4.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme_override_fonts/normal_font = ExtResource("3_s2tsk")
+bbcode_enabled = true
+text = "[wave amp=30  freq=10] >Presione [ENTER] para voltar ao menu principal< [/wave]
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputComponent" parent="." instance=ExtResource("4_s2tsk")]
+
+[connection signal="action_detected" from="InputComponent" to="." method="_on_input_component_action_detected"]
