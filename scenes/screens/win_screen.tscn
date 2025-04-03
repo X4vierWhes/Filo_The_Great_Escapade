@@ -6,6 +6,21 @@
 [ext_resource type="FontFile" uid="uid://be7xknjupmbh4" path="res://resources/font/Minecraft.ttf" id="3_mcovk"]
 [ext_resource type="PackedScene" uid="uid://d2fk6qnh7cs2u" path="res://scenes/components/input_component.tscn" id="4_mcovk"]
 
+[sub_resource type="Animation" id="Animation_l5ckm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/CapybaraCrown:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(588, 36)]
+}
+
 [sub_resource type="Animation" id="Animation_ey0qu"]
 resource_name = "crown"
 length = 2.0
@@ -21,21 +36,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(588, 36), Vector2(587, 164), Vector2(588, 36)]
-}
-
-[sub_resource type="Animation" id="Animation_l5ckm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/Control/CapybaraCrown:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(588, 36)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5w3vv"]
