@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://yx7580aq2bxa" path="res://scripts/characters/obj_player.gd" id="1_al7wv"]
 [ext_resource type="Texture2D" uid="uid://cfoubkbu2nhnw" path="res://resources/capybara/Player.png" id="1_lkki5"]
 [ext_resource type="Script" uid="uid://b0585csxi15tx" path="res://scripts/components/move_component.gd" id="3_4ug2v"]
-[ext_resource type="Script" uid="uid://cr6afbw1gm67n" path="res://scripts/components/jump_component.gd" id="4_k76db"]
+[ext_resource type="Script" uid="uid://qvoqwv80u3nc" path="res://scenes/characters/jump_component.gd" id="4_jjvmg"]
 [ext_resource type="Script" uid="uid://cxiw4do2kd6dn" path="res://scenes/characters/attack_component.gd" id="5_jjvmg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_al7wv"]
@@ -154,7 +154,7 @@ debug_color = Color(0.621578, 0.533752, 0, 0.42)
 script = ExtResource("3_4ug2v")
 
 [node name="jumpComponent" type="Node" parent="."]
-script = ExtResource("4_k76db")
+script = ExtResource("4_jjvmg")
 
 [node name="attackComponent" type="Node2D" parent="." node_paths=PackedStringArray("attack_area")]
 script = ExtResource("5_jjvmg")
