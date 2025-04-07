@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://5pnuxf4aswaq"]
+[gd_scene load_steps=18 format=4 uid="uid://5pnuxf4aswaq"]
 
 [ext_resource type="Script" uid="uid://b3hxg4um1pl14" path="res://scripts/screens/game_screen.gd" id="1_5wjna"]
 [ext_resource type="Texture2D" uid="uid://cy6osj57qdeop" path="res://resources/screens/Background.png" id="2_5wjna"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dqb2a71cpyxyx" path="res://resources/Wall.png" id="5_riit4"]
 [ext_resource type="Script" uid="uid://wmbpd8rlqofq" path="res://scripts/components/spawner_component.gd" id="6_riit4"]
 [ext_resource type="PackedScene" uid="uid://bnl4db5b77vha" path="res://scenes/characters/wall.tscn" id="7_d7q35"]
+[ext_resource type="Script" uid="uid://bqkujk6mgq02b" path="res://scripts/screens/camera_2d.gd" id="10_ac6br"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_d7q35"]
 scenes/1/scene = ExtResource("7_d7q35")
@@ -81,6 +82,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1546, 475), Vector2(1031, 478)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [10.0, 0.5, 6],
+"method": &"start_random_shake"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xi1he"]
 _data = {
@@ -93,6 +108,7 @@ script = ExtResource("1_5wjna")
 player_spawn = NodePath("CanvasLayer/Control/playerSpawn")
 label = NodePath("CanvasLayer/Control/RichTextLabel")
 spawner = NodePath("SpawnerComponent")
+dist = 290
 anim_player = NodePath("AnimationPlayer")
 screen_audio = "Level_Music"
 
@@ -187,7 +203,7 @@ position = Vector2(1240, 517)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-zoom = Vector2(0.725, 0.725)
+script = ExtResource("10_ac6br")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
