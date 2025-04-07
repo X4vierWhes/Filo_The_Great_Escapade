@@ -37,6 +37,7 @@ func _process(delta: float) -> void:
 		anim_player.queue_free()
 		obj_wolf.position.x = 1031.0
 		wolf_spawned = true
+	
 
 func attDist() -> void:
 	dist+=1
