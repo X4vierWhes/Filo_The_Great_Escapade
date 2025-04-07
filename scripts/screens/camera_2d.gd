@@ -6,7 +6,7 @@ var tween: Tween
 func _ready() -> void:
 	tween = create_tween()
 
-func start_random_shake(strength: float = 30.0, duration: float = 1.5, steps: int = 6) -> void:
+func start_random_shake(strength: float = 30.0, duration: float = 0.2, steps: int = 10) -> void:
 	if tween.is_running():
 		tween.kill()
 	
