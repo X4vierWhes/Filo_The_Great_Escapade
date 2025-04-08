@@ -8,3 +8,4 @@ func execute() -> void:
 	
 	parent.state = "jump"
 	parent.velocity.y = -parent.vSpd
+	parent.audio.play_audio("jump")

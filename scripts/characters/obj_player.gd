@@ -5,6 +5,7 @@ class_name Player
 @onready var anim_player: AnimatedSprite2D = $animPlayer
 @onready var attack_area: Area2D = $attackArea
 @onready var player_damage: float = 150.0
+@onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 
 func _ready() -> void:
 	state = "run"
@@ -51,4 +52,5 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 
 func _on_collision_area_body_entered(body: Node2D) -> void:
 	if body is Enemy or body is WolfAttack:
+		audio.play_audio("knockout")
 		emit_signal("death")

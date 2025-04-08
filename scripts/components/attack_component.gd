@@ -9,6 +9,7 @@ func execute() -> void:
 		parent.state = "attacking"
 		parent.isAttacking = true
 		attack_area.monitoring = true
+		parent.audio.play_audio("attack")
 
 func _on_anim_player_animation_finished() -> void:
 	if parent.anim_player.animation == "attacking":

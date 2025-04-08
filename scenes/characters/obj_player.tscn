@@ -1,10 +1,26 @@
-[gd_scene load_steps=21 format=3 uid="uid://bwkiyfr51gug5"]
+[gd_scene load_steps=29 format=3 uid="uid://bwkiyfr51gug5"]
 
 [ext_resource type="Script" uid="uid://yx7580aq2bxa" path="res://scripts/characters/obj_player.gd" id="1_al7wv"]
 [ext_resource type="Texture2D" uid="uid://cfoubkbu2nhnw" path="res://resources/capybara/Player.png" id="1_lkki5"]
+[ext_resource type="Script" uid="uid://b43c6nspvpnd6" path="res://scripts/components/sound_effects_component.gd" id="2_222kf"]
+[ext_resource type="AudioStream" uid="uid://cs5yr754p7jrr" path="res://resources/audios/sfx/filo/filo_jump.wav" id="2_711tn"]
+[ext_resource type="AudioStream" uid="uid://dqvgm8jwqd2ya" path="res://resources/audios/sfx/filo/filo_doublejump.wav" id="3_3q5do"]
 [ext_resource type="Script" uid="uid://b0585csxi15tx" path="res://scripts/components/move_component.gd" id="3_4ug2v"]
-[ext_resource type="Script" uid="uid://qvoqwv80u3nc" path="res://scripts/components/jump_component.gd" id="4_jjvmg"]
+[ext_resource type="AudioStream" uid="uid://bhhhqyvdjoc1r" path="res://resources/audios/sfx/filo/filo_knockout.wav" id="4_5orif"]
 [ext_resource type="Script" uid="uid://cxiw4do2kd6dn" path="res://scripts/components/attack_component.gd" id="5_jjvmg"]
+[ext_resource type="AudioStream" uid="uid://dka4n4xixy73f" path="res://resources/audios/sfx/filo/filo_attack_1.wav" id="6_2mi5l"]
+[ext_resource type="AudioStream" uid="uid://dd8060rfq6d5" path="res://resources/audios/sfx/filo/filo_attack_2.wav" id="7_1dhwp"]
+[ext_resource type="AudioStream" uid="uid://bjhl0geisqji0" path="res://resources/audios/sfx/filo/filo_attack_3.wav" id="8_eoitd"]
+[ext_resource type="Script" uid="uid://cr6afbw1gm67n" path="res://scripts/components/double_jump_component.gd" id="11_2mi5l"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5orif"]
+playback_mode = 1
+streams_count = 3
+stream_0/stream = ExtResource("6_2mi5l")
+stream_1/stream = ExtResource("7_1dhwp")
+stream_1/weight = 1.25
+stream_2/stream = ExtResource("8_eoitd")
+stream_2/weight = 0.75
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_al7wv"]
 atlas = ExtResource("1_lkki5")
@@ -116,6 +132,16 @@ speed = 200.0
 vSpd = 350.0
 gravity = 400.0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+script = ExtResource("2_222kf")
+audio_playlist = {
+&"attack": SubResource("AudioStreamRandomizer_5orif"),
+&"doublejump": ExtResource("3_3q5do"),
+&"jump": ExtResource("2_711tn"),
+&"knockout": ExtResource("4_5orif")
+}
+
 [node name="animPlayer" type="AnimatedSprite2D" parent="."]
 texture_filter = 3
 scale = Vector2(1.5, 1.5)
@@ -154,7 +180,7 @@ debug_color = Color(0.621578, 0.533752, 0, 0.42)
 script = ExtResource("3_4ug2v")
 
 [node name="jumpComponent" type="Node" parent="."]
-script = ExtResource("4_jjvmg")
+script = ExtResource("11_2mi5l")
 
 [node name="attackComponent" type="Node2D" parent="." node_paths=PackedStringArray("attack_area")]
 script = ExtResource("5_jjvmg")

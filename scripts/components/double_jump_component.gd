@@ -19,4 +19,10 @@ func execute() -> void:
 	
 	parent.state = "jump"
 	parent.velocity.y = -parent.vSpd
+	
+	if teste == max_teste:
+		parent.audio.play_audio('jump')
+	else:
+		parent.audio.play_audio('doublejump')
+	
 	teste-=1
