@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b52wnkb1ho622"]
+[gd_scene load_steps=4 format=3 uid="uid://b52wnkb1ho622"]
 
 [ext_resource type="Script" uid="uid://c2nk425bij4ac" path="res://scripts/screens/init_menu.gd" id="1_8malx"]
 [ext_resource type="Texture2D" uid="uid://c02js7roh72ma" path="res://resources/screens/Title_Screen.png" id="2_41us2"]
 [ext_resource type="FontFile" uid="uid://be7xknjupmbh4" path="res://resources/font/Minecraft.ttf" id="3_7jy4t"]
-[ext_resource type="PackedScene" uid="uid://d2fk6qnh7cs2u" path="res://scenes/components/input_component.tscn" id="4_41us2"]
 
 [node name="Init_Menu" type="Node2D"]
 script = ExtResource("1_8malx")
@@ -51,7 +50,3 @@ text = "[rainbow freq=0.2 sat=10 val=20] [wave amp=30  freq=10] Presione [ENTER]
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="InputComponent" parent="." instance=ExtResource("4_41us2")]
-
-[connection signal="action_detected" from="InputComponent" to="." method="_on_input_component_action_detected"]

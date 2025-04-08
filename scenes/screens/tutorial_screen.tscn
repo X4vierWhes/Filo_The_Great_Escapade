@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://fq6hhdxdmqg6"]
+[gd_scene load_steps=4 format=3 uid="uid://fq6hhdxdmqg6"]
 
 [ext_resource type="Texture2D" uid="uid://pbctf4cuji51" path="res://resources/screens/Tutorial.png" id="1_cbiel"]
 [ext_resource type="Script" uid="uid://bfweih56abmqc" path="res://scripts/screens/tutorial_screen.gd" id="1_e3hc4"]
 [ext_resource type="FontFile" uid="uid://be7xknjupmbh4" path="res://resources/font/Minecraft.ttf" id="2_e3hc4"]
-[ext_resource type="PackedScene" uid="uid://d2fk6qnh7cs2u" path="res://scenes/components/input_component.tscn" id="4_e3hc4"]
 
 [node name="tutorial_screen" type="Node2D"]
 script = ExtResource("1_e3hc4")
@@ -50,7 +49,3 @@ text = "[wave amp=30  freq=10] >Presione [ENTER] para inicializar< [/wave]
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
-
-[node name="InputComponent" parent="." instance=ExtResource("4_e3hc4")]
-
-[connection signal="action_detected" from="InputComponent" to="." method="_on_input_component_action_detected"]

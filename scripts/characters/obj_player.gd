@@ -23,45 +23,25 @@ func _process(delta: float) -> void:
 	anim_player.play(state)
 	move_and_slide()
 
-func _on_input_component_input_detected(input_vector: Vector2) -> void:
-	if input_vector.y > 0: #Verifica se foi clicado o "move_down" e ignora se sim
-		return
+func _input(event: InputEvent) -> void:
+	var move_direction = Input.get_axis("move_left", "move_right") * speed
+	$moveComponent.direction = move_direction
+	$moveComponent.execute()
 	
-	if input_vector.y == -1 && is_on_ground(): #Se clicado o "move_up", chama a função de pulo do personagem
-		jump()
+	if Input.is_action_just_pressed("move_up"):
+		$jumpComponent.execute()
 	
-	velocity.x = input_vector.x * speed #direção horizontal
-
-
-func _on_input_component_action_detected(action: String) -> void:
-	if action == "attack":
-		attack()
-
-func jump() -> void:
-	if !isAttacking:
-		#print("Pulei")
-		state = "jump"
-		velocity.y = -vSpd
+	if Input.is_action_just_pressed("attack"):
+		$attackComponent.execute()
 	
-
-func attack() -> void:
-	if is_on_ground() and !isAttacking:
-		state = "attacking"
-		isAttacking = !isAttacking
-		attack_area.get_child(0).disabled = false
-	elif isAttacking:
-		attack_area.get_child(0).disabled = true
+	if Input.is_action_just_pressed("confirm"):
+		print('confirma')
 
 func is_on_ground() -> bool:
 	return ray_cast_2d.is_colliding()
 
 
-func _on_anim_player_animation_finished() -> void:
-	if anim_player.animation == "attacking":
-		attack()
-		isAttacking = !isAttacking
-		state = "run"
-
+## Colisões
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.death()
