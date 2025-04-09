@@ -133,6 +133,7 @@ vSpd = 350.0
 gravity = 400.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 3
 bus = &"sfx"
 script = ExtResource("2_222kf")
 audio_playlist = {
