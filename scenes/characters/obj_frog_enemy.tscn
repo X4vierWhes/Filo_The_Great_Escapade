@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://4njax7d3jg42"]
+[gd_scene load_steps=10 format=3 uid="uid://4njax7d3jg42"]
 
 [ext_resource type="PackedScene" uid="uid://bu8uf7xr05y4j" path="res://scenes/characters/base_enemy.tscn" id="1_iug8b"]
 [ext_resource type="Script" uid="uid://rx5ec1rowkou" path="res://scripts/characters/obj_frog_enemy.gd" id="2_kmosm"]
 [ext_resource type="Texture2D" uid="uid://bu16g01m58ytt" path="res://resources/enemys/frog.png" id="3_umakp"]
+[ext_resource type="AudioStream" uid="uid://ceuc6lm4a5yry" path="res://resources/audios/sfx/frog/frog_jump.wav" id="4_umakp"]
+[ext_resource type="AudioStream" uid="uid://ckkeo2edjma4q" path="res://resources/audios/sfx/frog/frog_knockout.wav" id="5_pq41u"]
+[ext_resource type="AudioStream" uid="uid://bq7otj3ubvff4" path="res://resources/audios/sfx/frog/frog_landing.wav" id="6_pq41u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pq41u"]
 atlas = ExtResource("3_umakp")
@@ -53,5 +56,13 @@ polygon = PackedVector2Array(-4, 3, -6, -5, -6, -9, -4, -12, -2, -12, 3, -6, 5, 
 disabled = true
 
 [node name="Timer" type="Timer" parent="." index="4"]
+
+[node name="AudioStreamPlayer" parent="." index="5"]
+max_polyphony = 2
+audio_playlist = {
+&"jump": ExtResource("4_umakp"),
+&"knockout": ExtResource("5_pq41u"),
+&"landing": ExtResource("6_pq41u")
+}
 
 [connection signal="timeout" from="Timer" to="." method="jump"]

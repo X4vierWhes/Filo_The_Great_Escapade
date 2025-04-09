@@ -9,4 +9,8 @@ som da caixa:
 	https://freesound.org/people/kyles/sounds/452553/
 	https://freesound.org/people/MatthewKEvans/sounds/708529/
 
+som de sapo:
+	https://freesound.org/people/wak4n/sounds/749487/
+	https://freesound.org/people/JfishSoM/sounds/703512/
+
 plugins base do reaper
