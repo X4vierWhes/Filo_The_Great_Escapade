@@ -1,8 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwf1t27irqgvj"]
+[gd_scene load_steps=15 format=3 uid="uid://bwf1t27irqgvj"]
 
 [ext_resource type="PackedScene" uid="uid://bu8uf7xr05y4j" path="res://scenes/characters/base_enemy.tscn" id="1_okse4"]
 [ext_resource type="Texture2D" uid="uid://cgivcl1ni8dhq" path="res://resources/enemys/Crow_Enemy.png" id="2_sdlos"]
 [ext_resource type="Script" uid="uid://bdhrwdcbqshfn" path="res://scripts/characters/obj_crow_enemy.gd" id="2_ts3rr"]
+[ext_resource type="AudioStream" uid="uid://cvs8c5psq8mrh" path="res://resources/audios/sfx/crow/crow_knockout.wav" id="4_1qobg"]
+[ext_resource type="AudioStream" uid="uid://dwun0l0v33w5t" path="res://resources/audios/sfx/crow/crow_attack.wav" id="5_6xaar"]
+[ext_resource type="AudioStream" uid="uid://dfxlhkoqw5d20" path="res://resources/audios/sfx/crow/crow_flap_1.wav" id="6_a4b7l"]
+[ext_resource type="AudioStream" uid="uid://dqce2ts7dr315" path="res://resources/audios/sfx/crow/crow_flap_2.wav" id="7_6xtip"]
+[ext_resource type="AudioStream" uid="uid://do1ix8ngge6x3" path="res://resources/audios/sfx/crow/crow_flap_3.wav" id="8_lqk6c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ts3rr"]
 atlas = ExtResource("2_sdlos")
@@ -40,6 +45,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yjq7f"]
+playback_mode = 1
+random_pitch = 1.44
+streams_count = 3
+stream_0/stream = ExtResource("6_a4b7l")
+stream_1/stream = ExtResource("7_6xtip")
+stream_2/stream = ExtResource("8_lqk6c")
+
 [node name="objCrowEnemy" instance=ExtResource("1_okse4")]
 script = ExtResource("2_ts3rr")
 
@@ -53,3 +66,23 @@ polygon = PackedVector2Array(-6, 10, -17, -4, -12, -8, -9, -8, -2, -5, 13, 5, 5,
 [node name="VisibleOnScreenNotifier2D" parent="." index="2"]
 position = Vector2(0, -0.499999)
 scale = Vector2(1.8, 1.15)
+
+[node name="AudioStreamPlayer" parent="." index="3"]
+max_polyphony = 2
+audio_playlist = {
+&"attack": ExtResource("5_6xaar"),
+&"flap": SubResource("AudioStreamRandomizer_yjq7f"),
+&"knockout": ExtResource("4_1qobg")
+}
+
+[node name="Timer" type="Timer" parent="." index="4"]
+autostart = true
+
+[node name="attack_range" type="Area2D" parent="." index="5"]
+collision_layer = 0
+
+[node name="collision" type="CollisionPolygon2D" parent="attack_range" index="0"]
+polygon = PackedVector2Array(-6, 10, -17, -4, -12, -8, -9, -8, -2, -5, 13, 5, 5, 10)
+
+[connection signal="timeout" from="Timer" to="." method="_play_sound"]
+[connection signal="area_entered" from="attack_range" to="." method="_on_attack_range_area_entered"]
