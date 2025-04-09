@@ -13,4 +13,9 @@ som de sapo:
 	https://freesound.org/people/wak4n/sounds/749487/
 	https://freesound.org/people/JfishSoM/sounds/703512/
 
+som do corvo:
+	https://freesound.org/people/deleted_user_2104797/sounds/330964/
+	https://freesound.org/people/JustinBW/sounds/70195/
+	https://freesound.org/people/deadrobotmusic/sounds/673545/
+
 plugins base do reaper
