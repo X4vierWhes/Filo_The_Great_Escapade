@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu8uf7xr05y4j"]
+[gd_scene load_steps=3 format=3 uid="uid://bu8uf7xr05y4j"]
 
 [ext_resource type="Script" uid="uid://b3ytbo8xw42wq" path="res://scripts/characters/obj_enemy.gd" id="1_dbqx0"]
+[ext_resource type="Script" uid="uid://b43c6nspvpnd6" path="res://scripts/components/sound_effects_component.gd" id="2_621jf"]
 
 [node name="baseEnemy" type="CharacterBody2D"]
 collision_layer = 4
@@ -12,5 +13,8 @@ script = ExtResource("1_dbqx0")
 [node name="collision" type="CollisionPolygon2D" parent="."]
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("2_621jf")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -13,4 +13,10 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
 func death() -> void:
-	queue_free()
+	$AudioStreamPlayer.play_audio("knockout")
+	$anim.visible = false
+	$collision.set_deferred("disabled", true)
+	$AudioStreamPlayer.finished.connect(func():
+		queue_free()
+		)
+	
