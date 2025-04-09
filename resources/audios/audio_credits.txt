@@ -1,0 +1,12 @@
+sons de capivara: 
+	base -> https://www.youtube.com/watch?v=FbXsjI0T16Q
+	com layers de instrumentos virtuais:
+		sintetizador virtual analog dreams 2.0 com o preset "bubble boi" e algumas modificações mínimas
+		sons do teclado elétrico casio ctk-1550
+
+som da caixa:
+	https://freesound.org/people/WasabiWielder/sounds/334211/
+	https://freesound.org/people/kyles/sounds/452553/
+	https://freesound.org/people/MatthewKEvans/sounds/708529/
+
+plugins base do reaper
