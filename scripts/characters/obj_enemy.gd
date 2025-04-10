@@ -20,3 +20,9 @@ func death() -> void:
 		queue_free()
 		)
 	
+	$AudioStreamPlayer.finished.connect(func():
+		queue_free()
+		)
+	for i in get_children():
+		if i != $AudioStreamPlayer:
+			i.queue_free()
