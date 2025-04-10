@@ -7,7 +7,7 @@ class_name ScreenInterface
 signal close_screen
 
 func get_Audio() -> String:
-	return "res://resources/audios/" + screen_audio + ".wav"
+	return "res://resources/audios/soundtrack/" + screen_audio + ".wav"
 
 func get_NextScreen() -> String:
 	if next_screen != "null":

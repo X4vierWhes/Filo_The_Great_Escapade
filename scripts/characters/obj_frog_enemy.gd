@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 		if velocity.y >= 0:
 			velocity.y = 0.0
 			if not anim.animation == "default":
-				swap_states()
+				call_deferred("swap_states")
 	else:
 		velocity.y += delta * gravity * gravity
 	
@@ -31,9 +31,9 @@ func _physics_process(delta: float) -> void:
 
 func jump() -> void :
 	if is_on_floor():
-		print('vou pular')
+		$AudioStreamPlayer.play_audio("jump")
 		velocity.y = -jump_force
-		swap_states()
+		call_deferred("swap_states")
 
 func swap_states() -> void:
 	$collision_jump.disabled = !$collision_jump.disabled

@@ -1,0 +1,21 @@
+sons de capivara: 
+	base -> https://www.youtube.com/watch?v=FbXsjI0T16Q
+	com layers de instrumentos virtuais:
+		sintetizador virtual analog dreams 2.0 com o preset "bubble boi" e algumas modificações mínimas
+		sons do teclado elétrico casio ctk-1550
+
+som da caixa:
+	https://freesound.org/people/WasabiWielder/sounds/334211/
+	https://freesound.org/people/kyles/sounds/452553/
+	https://freesound.org/people/MatthewKEvans/sounds/708529/
+
+som de sapo:
+	https://freesound.org/people/wak4n/sounds/749487/
+	https://freesound.org/people/JfishSoM/sounds/703512/
+
+som do corvo:
+	https://freesound.org/people/deleted_user_2104797/sounds/330964/
+	https://freesound.org/people/JustinBW/sounds/70195/
+	https://freesound.org/people/deadrobotmusic/sounds/673545/
+
+plugins base do reaper
