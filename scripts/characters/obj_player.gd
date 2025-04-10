@@ -20,7 +20,6 @@ func _process(delta: float) -> void:
 		state = "jump"
 		velocity.y += gravity * delta
 	
-	#print(state)
 	anim_player.play(state)
 	move_and_slide()
 
@@ -41,7 +40,9 @@ func _input(event: InputEvent) -> void:
 func is_on_ground() -> bool:
 	return ray_cast_2d.is_colliding()
 
-
+## Aplicar upgrades ##
+func _apply_double_jump() -> void:
+	$jumpComponent._apply_double_jump()
 ## Colisões
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body is Enemy:
@@ -51,6 +52,9 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 		body.get_Damage(player_damage)
 
 func _on_collision_area_body_entered(body: Node2D) -> void:
-	if body is Enemy or body is WolfAttack:
+	if !(body is Upgrade) && body is Enemy or body is WolfAttack:
 		audio.play_audio("knockout")
 		emit_signal("death")
+	elif body is Upgrade:
+		_apply_double_jump()
+		body.death()

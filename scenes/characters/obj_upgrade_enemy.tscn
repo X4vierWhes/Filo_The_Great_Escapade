@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://nfps3bkouwew"]
+
+[ext_resource type="Script" uid="uid://bxpku4023b0wy" path="res://scripts/characters/obj_upgrade.gd" id="1_j3gea"]
+[ext_resource type="Texture2D" uid="uid://bysocw45pgqcd" path="res://resources/upgrades/Upgrade.png" id="2_7m4l5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvik"]
+size = Vector2(29, 22)
+
+[node name="obj_upgrade" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_j3gea")
+metadata/_custom_type_script = "uid://b3ytbo8xw42wq"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+scale = Vector2(2, 2)
+texture = ExtResource("2_7m4l5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_3jvik")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-2.38419e-07, 2.38419e-07)
+scale = Vector2(1.6, 1.6)

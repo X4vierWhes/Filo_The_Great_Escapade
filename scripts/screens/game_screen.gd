@@ -16,6 +16,8 @@ const OBJ_PLAYER = preload("res://scenes/characters/obj_player.tscn")
 @onready var parallax_background: Parallax = $ParallaxBackground
 
 var wolf_spawned: bool = false
+var can_upgrade_spawn: bool = true
+
 func _ready() -> void:
 	obj_wolf.death.connect(_on_wolf_death)
 	var player: Player = OBJ_PLAYER.instantiate()
@@ -37,7 +39,9 @@ func _process(delta: float) -> void:
 		anim_player.queue_free()
 		obj_wolf.position.x = 1031.0
 		wolf_spawned = true
-	
+	elif dist == 50 && can_upgrade_spawn:
+		spawner.spawn_Enemy("upgrade")
+		can_upgrade_spawn = false
 
 func attDist() -> void:
 	dist+=1

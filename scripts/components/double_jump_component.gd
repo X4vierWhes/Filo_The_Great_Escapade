@@ -1,9 +1,9 @@
 extends Node
-
+class_name JumpComponent
 @onready var parent:CharacterBody2D = get_parent()
 
-var max_jump:int = 2
-var jump:int = 2
+var max_jump:int = 1
+var jump:int = 1
 
 func _physics_process(delta: float) -> void:
 	if jump < max_jump:
@@ -11,6 +11,9 @@ func _physics_process(delta: float) -> void:
 			jump = max_jump
 			print('entrei')
 
+func _apply_double_jump() -> void:
+	max_jump = 2
+	jump = 2
 
 func execute() -> void:
 	print(jump)

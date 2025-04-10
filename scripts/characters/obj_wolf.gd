@@ -5,26 +5,42 @@ class_name Wolf
 @onready var anim: AnimatedSprite2D = $anim
 @onready var start: bool = false
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var attack_timer: Timer = $attackTimer
 
 func _ready() -> void:
 	anim.play("idle")
 
-func _process(delta: float) -> void:
-	if start:
-		pass
-	else:
-		pass
+func _process(_delta: float) -> void:
+	pass
 
 func get_Damage(dmg: float) -> void:
 	healthComponent.decrease_health(dmg)
 	print(healthComponent.get_Health())
 
+func _attack() -> void:
+	play_anim_howl()
+	await anim.animation_finished
+	play_anim("idle")
+	var timer:= get_tree().create_timer(1)
+	await timer.timeout
+	play_anim("attack")
+	
+	
+
+## Sinais ##
 func on_wolf_death() -> void:
 	emit_signal("death")
 
+func _on_helth_component_death() -> void:
+	on_wolf_death()
+
+func _on_attack_timer_timeout() -> void:
+	_attack()
+
+## Funções para animation player ##
 func init_wolf() -> void:
 	anim.play("idle")
-	start = !start
+	attack_timer.start()
 
 func play_anim(anim_name: String) -> void:
 	anim.play(anim_name)
@@ -35,7 +51,3 @@ func play_anim_walk() -> void:
 func play_anim_howl() -> void:
 	anim.play("howl")
 	audio_stream_player.play()
-
-
-func _on_helth_component_death() -> void:
-	on_wolf_death()

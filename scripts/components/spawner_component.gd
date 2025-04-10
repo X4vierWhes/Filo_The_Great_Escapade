@@ -7,7 +7,7 @@ class_name SpawnerComponent
 
 func spawn_Enemy(enemy_name: String) -> void:
 	var enemy: Enemy = _get_EnemyScene(enemy_name).instantiate()
-	
+	print(enemy_name)
 	if enemy_name == "crow":
 		enemy.position = air_spawner.position
 	else:

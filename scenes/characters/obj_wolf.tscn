@@ -185,7 +185,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hajoy")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -205,7 +205,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ep80j")
 }],
-"loop": true,
+"loop": false,
 "name": &"howl",
 "speed": 5.0
 }, {
@@ -248,7 +248,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jkoi7")
 }],
-"loop": true,
+"loop": false,
 "name": &"walk",
 "speed": 5.0
 }]
@@ -265,8 +265,7 @@ healthComponent = NodePath("HelthComponent")
 [node name="anim" type="AnimatedSprite2D" parent="."]
 texture_filter = 3
 sprite_frames = SubResource("SpriteFrames_qb04m")
-animation = &"idle"
-frame_progress = 0.00318821
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5.5, 15.5)
@@ -276,6 +275,7 @@ shape = SubResource("RectangleShape2D_mqcte")
 max_health_value = 150.0
 
 [node name="attackTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [node name="AttackPosition" type="Marker2D" parent="."]
 position = Vector2(-59, 20)
@@ -284,3 +284,4 @@ position = Vector2(-59, 20)
 stream = ExtResource("4_nxlcm")
 
 [connection signal="death" from="HelthComponent" to="." method="_on_helth_component_death"]
+[connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

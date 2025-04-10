@@ -1,4 +1,5 @@
 extends Enemy
+class_name Frog
 
 @export var gravity:float = 25
 @export var jump_force:float = 500
@@ -18,7 +19,7 @@ func _ready() -> void:
 	timer.start(randi_range(wait_time_min, wait_time_max))
 
 func _physics_process(delta: float) -> void:
-	if is_on_floor():
+	if is_on_floor() and !_death:
 		if velocity.y >= 0:
 			velocity.y = 0.0
 			if not anim.animation == "default":
