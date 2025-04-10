@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmvheprtr4lwl"]
+[gd_scene load_steps=4 format=3 uid="uid://cmvheprtr4lwl"]
 
 [ext_resource type="Script" uid="uid://evx3idd3v1ue" path="res://scripts/screens/game_over_screen.gd" id="1_qbcbk"]
 [ext_resource type="Texture2D" uid="uid://dhodxtudusmq2" path="res://resources/screens/Game_Over.png" id="2_alvey"]
 [ext_resource type="FontFile" uid="uid://be7xknjupmbh4" path="res://resources/font/Minecraft.ttf" id="3_s2tsk"]
-[ext_resource type="PackedScene" uid="uid://d2fk6qnh7cs2u" path="res://scenes/components/input_component.tscn" id="4_s2tsk"]
 
 [node name="game_over_screen" type="Node2D"]
 script = ExtResource("1_qbcbk")
@@ -49,7 +48,3 @@ text = "[pulse freq=2.0 color=#ffffff40 ease=-2.0]>Presione [ENTER] para voltar 
 "
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="InputComponent" parent="." instance=ExtResource("4_s2tsk")]
-
-[connection signal="action_detected" from="InputComponent" to="." method="_on_input_component_action_detected"]

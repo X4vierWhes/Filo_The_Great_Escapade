@@ -7,10 +7,10 @@ class_name WinScreen
 func _ready() -> void:
 	animation_player.play("crown")
 
-func _on_input_component_action_detected(action: String) -> void:
-	if action == "confirm":
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("confirm"):
 		emit_signal("close_screen")
-	pass
+		pass
 
 func _on_flip_timer_timeout() -> void:
 	texture_rect.flip_h = !texture_rect.flip_h

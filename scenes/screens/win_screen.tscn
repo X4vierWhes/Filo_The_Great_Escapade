@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dj6rdrs8y6vj7"]
+[gd_scene load_steps=8 format=3 uid="uid://dj6rdrs8y6vj7"]
 
 [ext_resource type="Script" uid="uid://cmhat4vsms5g" path="res://scripts/screens/win_screen.gd" id="1_xjpxm"]
 [ext_resource type="Texture2D" uid="uid://dt8n1o8a2fymb" path="res://resources/screens/Win_Screen.png" id="2_ctclw"]
 [ext_resource type="Texture2D" uid="uid://cwd5jhi7ngywv" path="res://resources/screens/Capybara_Crown.png" id="3_cmosp"]
 [ext_resource type="FontFile" uid="uid://be7xknjupmbh4" path="res://resources/font/Minecraft.ttf" id="3_mcovk"]
-[ext_resource type="PackedScene" uid="uid://d2fk6qnh7cs2u" path="res://scenes/components/input_component.tscn" id="4_mcovk"]
 
 [sub_resource type="Animation" id="Animation_l5ckm"]
 length = 0.001
@@ -95,8 +94,6 @@ text = "[color= black][pulse freq=2.0 color=#ffffff40 ease=-2.0]>Presione [ENTER
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InputComponent" parent="." instance=ExtResource("4_mcovk")]
-
 [node name="flipTimer" type="Timer" parent="."]
 autostart = true
 
@@ -105,6 +102,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_5w3vv")
 }
 
-[connection signal="action_detected" from="InputComponent" to="." method="_on_input_component_action_detected"]
 [connection signal="timeout" from="flipTimer" to="." method="_on_flip_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
