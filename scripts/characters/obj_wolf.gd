@@ -7,6 +7,8 @@ class_name Wolf
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var attack_timer: Timer = $attackTimer
 
+const OBJ_WOLF_ATTACK = preload("res://scenes/characters/obj_wolf_attack.tscn")
+
 func _ready() -> void:
 	anim.play("idle")
 
@@ -22,9 +24,12 @@ func _attack() -> void:
 	await anim.animation_finished
 	play_anim("idle")
 	var timer:= get_tree().create_timer(1)
+	print(timer)
 	await timer.timeout
 	play_anim("attack")
-	
+	var attack :Node = OBJ_WOLF_ATTACK.instantiate()
+	attack.position = $AttackPosition.position
+	add_child(attack)
 	
 
 ## Sinais ##
