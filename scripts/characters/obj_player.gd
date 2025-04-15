@@ -54,6 +54,12 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 func _on_collision_area_body_entered(body: Node2D) -> void:
 	if !(body is Upgrade) && body is Enemy or body is WolfAttack:
 		audio.play_audio("knockout")
+		randomize()
+		velocity = Vector2.UP * 800.0
+		velocity.rotated(randf_range(deg_to_rad(-36.0), deg_to_rad(36.0)))
+		var tween :Tween = get_tree().create_tween()
+		tween.tween_property(self, "rotation", randf_range(-10.0, -4.0), randf_range(0.7, 3.0))
+		await get_tree().create_timer(0.5).timeout
 		emit_signal("death")
 	elif body is Upgrade:
 		_apply_double_jump()
