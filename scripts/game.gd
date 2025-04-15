@@ -8,6 +8,7 @@ class_name Game
 const INIT_MENU = preload("res://scenes/screens/init_menu.tscn") 
 var current_audio: String = "null"
 var current_screen: ScreenInterface
+var needs_tutorial:bool = true
 
 func _ready() -> void:
 	current_screen = INIT_MENU.instantiate()
